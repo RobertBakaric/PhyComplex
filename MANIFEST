@@ -1,0 +1,13 @@
+AUTHORS
+MANIFEST
+ChangeLog
+COPYING
+Makefile.PL
+NEWS
+README
+demo/Test.fa
+doc/PhyComplex.pdf
+src/apps/PhyComplex.pl
+src/lib/Complexity/Physical.pm
+src/t/00-load.t
+src/t/01-PhyComplex.t

@@ -1,0 +1,95 @@
+NAME
+    PhyComplex - Simple sequence physical complexity calculator 
+
+SYNOPSIS
+        use Complexity::Physical;
+
+        my $PSobject = Complexity::Physical->new();
+
+        $array = [['-','A','B','C','H','-','I','I','-'],
+                  ['-','A','C','C','S','-','-','I','-'],
+                  ['-','-','C','C','A','-','O','I','-']];
+
+        $query = 0;
+    
+        # -----        Compute Physical Complexity        ----- #
+        my $ps = $PSobject->PhyComplexCompute(queryid => $query, aligned => $array);
+
+        # -----               Print result                ----- #
+        print "Physicyl complexity of sequence 0 is: $ps\n"; ## Expected result:  3
+
+DESCRIPTION
+    The program utilizes a mathematical measure called physical complexity
+    [1] to compute the amount of information about a particular environment
+    stored in a given sequence. The measure should not be confused with the
+    Kolmogorov complexity since physical complexity only deals either with
+    the intrinsic regularity or irregularity of a sequence in this case.
+
+  new
+        my $PSobject = Complexity::Physical->new();
+
+    Creates a new Complexity::Physical object.
+
+  PhyComplexCompute
+        my $ps = $PSobject->PhyComplexCompute(queryid => $query, aligned => \@array);
+
+    Where \@array is an array reference to a 2D matrix consisting of the
+    aligned strings. Alignment is required or be global
+
+    Example: @array
+
+            [['-','A','B','C','H','-','I','I','-'],
+             ['-','A','C','C','S','-','-','I','-'],
+             ['-','-','C','C','A','-','O','I','-']]
+
+    queryid refers to the index position of the alignment in @array. For
+    example 0 refers to ['-','A','B','C','H','-','I','I','-'] setting it to
+    be the string for which the complexity is to be calculated.
+
+    Function returns the complexity value for a given query sequence.
+
+  _ComputePosEntropy
+        $H_cond = $self->_ComputePosEntropy(characters => \%hash, alphabet => $postot ) ;
+
+        This is a private function that computes the conditional entropy for a given 
+        location in a query sequence. Function requires list of all characters occupying 
+        a given location and their occurrence counts. Moreover, the information about the 
+        number of characters present at a given site needs to be provided through alphabet 
+        option (key).
+
+  _Log
+        $log = $self->_Log($p,$arg{alphabet})
+
+        Private function designed for computing a log_y(x). First argument is the value
+        and the second is the base.
+
+AUTHOR
+    Robert Bakaric <rbakaric@exaltum.eu>
+
+LICENSE
+
+
+
+#  Copyright 2016 Robert Bakaric <rbakaric@exaltum.eu>
+#  
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#  
+#  
+
+
+ACKNOWLEDGEMENT
+          1. Adami, C. and Cerf, N.J. (2000) Physical complexity of symbolic sequences, Physica D 137 62-69.
+
